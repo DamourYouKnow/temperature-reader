@@ -42,6 +42,14 @@ void loop() {
   if (currentMillis - lastMillisUpdate >= updateInterval) {
     lastMillisUpdate = currentMillis;
     int8_t temp = readTemperature();
+    if (temp > high) {
+      insert(readingBuffer, temp);
+      high = temp;
+    }
+    if (temp < high) {
+      insert(readingBuffer, temp);
+      low = temp;
+    }
 
     if (currentMillis - lastMillisReading >= readingBufferInterval) {
       lastMillisReading = currentMillis;
