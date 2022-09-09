@@ -46,7 +46,7 @@ void loop() {
       insert(readingBuffer, temp);
       high = temp;
     }
-    if (temp < high) {
+    if (temp < low) {
       insert(readingBuffer, temp);
       low = temp;
     }
