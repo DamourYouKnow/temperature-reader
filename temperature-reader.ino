@@ -27,6 +27,8 @@ void setup() {
   // Initialize reading buffer
   readingBuffer = newBuffer(readingBufferSize);
   int8_t temp = readTemperature();
+  low = temp;
+  high = temp;
   for (int i = 0; i < readingBufferSize; i++) {
     insert(readingBuffer, temp);
   }
@@ -42,6 +44,7 @@ void loop() {
     int8_t temp = readTemperature();
 
     if (currentMillis - lastMillisReading >= readingBufferInterval) {
+      lastMillisReading = currentMillis;
       insert(readingBuffer, temp);
       minMax(readingBuffer, &low, &high);
     }
